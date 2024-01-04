@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch Data From server</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+/* Header styles */
+header {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Main content styles */
+main {
+  padding: 20px 0;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+/* Footer styles */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Fetch Data From Serevr</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section>
+        <h2>Click on Button to fetch the data from live server and display here</h2>
+        <button onclick="FetchData()" width = "100px" height="50px">loadData</button>
+    <div id="data">
+    <script>
+     const FetchData=() =>{
+        fetch("https://restcountries.com/v3.1/all") //get data from the url
+        .then(data => data.json())                 // convert the data
+        .then(country =>{                       //display the data
+            
+            pakistan = `<table>
+           
+            <table border=4 class="table table-hover">
+              <tr>
+               <th>NAME</th>
+               <th>CAPITAL</th>
+               <th>CURRENCIES</th>
+               <th>LANGUAGES</th>
+               <th>AREA</th>
+               <th>CONTINENT</th>
+               <th>FLAG</th>
+              </tr>`;
+  
+
+              pakistan += `<tr>
+               <td>${country[6].name.common}</td>
+               <td>${country[6].capital}</td>
+               <td>${country[6].currencies.PKR.name} ${country[6].currencies.PKR.symbol}</td>
+               <td>${country[6].languages.eng} , ${country[6].languages.urd} </td>
+               <td>${country[6].area}</td>
+               <td>${country[6].continents}</td>
+               <td><img src="${country[6].flags
+.png}" width="100" height="100"/></td>
+             </tr>`
+              
+    
+  
+             pakistan +=`</table>`
+
+             document.getElementById("data").innerHTML=pakistan;
+        } )
+        .catch(error => console.error(error));
+
+     }
+</script>
+
+</div>
+      </section>
+      <!-- Add more sections/content here -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        ''''Happy New Year 2024''''</p>
+    </div>
+  </footer>
+
+</body>
+</html>
